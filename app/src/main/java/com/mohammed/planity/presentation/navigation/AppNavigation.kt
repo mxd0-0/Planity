@@ -1,8 +1,10 @@
 package com.mohammed.planity.presentation.navigation
 
-
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.scaleOut
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -14,7 +16,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -26,62 +27,112 @@ import androidx.navigation.navArgument
 import com.mohammed.planity.presentation.main.graph.GraphScreenRoute
 import com.mohammed.planity.presentation.main.home.HomeScreenRoute
 import com.mohammed.planity.presentation.main.home.createtask.CreateTaskScreenRoute
+import com.mohammed.planity.presentation.onBoarding.GetStartedScreen
+import com.mohammed.planity.presentation.settings.SettingsScreenRoute
 import com.mohammed.planity.ui.presentation.category.CategoryScreenRoute
 import com.mohammed.planity.ui.presentation.createcategory.CreateCategoryRoute
-import com.mohammed.planity.ui.presentation.settings.SettingsScreen
-import com.mohammed.planity.ui.presentation.taskinfo.TaskInfoRoute
+import com.mohammed.planity.presentation.main.home.taskinfo.TaskInfoRoute
 import com.mohammed.planity.ui.theme.gray400
 
+// --- ONBOARDING NAVIGATION ---
+
+object OnboardingDestinations {
+    const val GET_STARTED = "get_started"
+    const val AUTH_ROUTE = "auth_flow" // A route for the entire auth screen/flow
+}
 @Composable
-fun AppNavHost(navController: NavHostController) {
+fun OnboardingNavHost(
+    navController: NavHostController,
+    onOnboardingFinished: () -> Unit
+) {
+    NavHost(
+        navController = navController,
+        startDestination = OnboardingDestinations.GET_STARTED
+    ) {
+        composable(OnboardingDestinations.GET_STARTED) {
+            GetStartedScreen(
+                // Clicking the button now immediately signals that onboarding is finished
+                onGetStartedClick = onOnboardingFinished
+            )
+        }
+    }
+}
+
+
+// --- MAIN APP NAVIGATION ---
+
+@Composable
+fun AppNavHost(navController: NavHostController,onSignOut: () -> Unit) {
     NavHost(
         navController = navController,
         startDestination = Destinations.Home.route
     ) {
+        composable(Destinations.Settings.route,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it },
+                    animationSpec = tween(300)
+                ) + fadeIn(animationSpec = tween(300))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it },
+                    animationSpec = tween(300)
+                ) + fadeOut(animationSpec = tween(300))
+            }
+            ) {
+            SettingsScreenRoute(
+                onNavigateBack = { navController.popBackStack() },
+                onSignedOut = onSignOut // <-- Pass the callback down
+            )
+        }
         composable(Destinations.Home.route) {
             HomeScreenRoute(
-                onSettingsClick = { /* ... */ },
-                onAddCategoryClick = { navController.navigate(Destinations.CreateCategory.route) } // <-- ADD THIS
-                , onNavigateToTaskInfo = { taskId ->
+                onSettingsClick = { navController.navigate(Destinations.Settings.route) },
+                onAddCategoryClick = { navController.navigate(Destinations.CreateCategory.route) },
+                onNavigateToTaskInfo = { taskId ->
                     navController.navigate(Destinations.TaskInfo.withArgs(taskId))
                 }
             )
         }
+
         composable(
             route = Destinations.TaskInfo.route,
             arguments = listOf(navArgument("taskId") { type = NavType.StringType })
-        )
-        {
+        ) {
             TaskInfoRoute(
                 onNavigateBack = { navController.popBackStack() }
             )
         }
-        dialog(Destinations.CreateCategory.route) {
-            CreateCategoryRoute(onDismiss = { navController.popBackStack() })
-        }
-        composable(Destinations.Category.route ) {
+
+        composable(Destinations.Category.route) { // <-- CORRECTED: Was Destinations.Category
             CategoryScreenRoute(
                 onCreateCategory = { navController.navigate(Destinations.CreateCategory.route) },
                 onNavigateToSettings = { navController.navigate(Destinations.Settings.route) }
             )
         }
+
         composable(Destinations.Graph.route) {
             GraphScreenRoute(
                 onNavigateToSettings = { navController.navigate(Destinations.Settings.route) }
             )
         }
 
-        // Other screens
-        composable(Destinations.Settings.route) { SettingsScreen() }
+
+
         dialog(Destinations.CreateTask.route) {
             CreateTaskScreenRoute(
                 onDismiss = { navController.popBackStack() }
             )
         }
+
+        dialog(Destinations.CreateCategory.route) {
+            CreateCategoryRoute(
+                onDismiss = { navController.popBackStack() }
+            )
+        }
     }
 }
-
-// This BottomNavigationBar now iterates over our `bottomNavItems` list
 @Composable
 fun AppBottomNavigationBar(
     navController: NavController,

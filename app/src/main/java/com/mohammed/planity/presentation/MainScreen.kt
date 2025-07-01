@@ -4,7 +4,6 @@ package com.mohammed.planity.presentation
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -12,19 +11,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.mohammed.planity.presentation.navigation.AppBottomNavigationBar
-import com.mohammed.planity.presentation.navigation.AppNavHost
 import com.mohammed.planity.presentation.navigation.Destinations
 import com.mohammed.planity.presentation.navigation.bottomNavItems
-import com.mohammed.planity.ui.theme.PlanityTheme
+import com.mohammed.planity.presentation.navigation.AppBottomNavigationBar
+import com.mohammed.planity.presentation.navigation.AppNavHost
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(onSignOut: () -> Unit) {
     val navController = rememberNavController()
     // --- START OF CHANGES ---
 
@@ -75,15 +72,8 @@ fun MainScreen() {
         Surface(
             modifier = Modifier.padding(innerPadding)
         ) {
-            AppNavHost(navController = navController)
+            AppNavHost(navController = navController,onSignOut = onSignOut)
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun MainScreenPreview() {
-    PlanityTheme {
-        MainScreen()
-    }
-}

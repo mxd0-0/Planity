@@ -8,7 +8,6 @@ package com.mohammed.planity.presentation.navigation
 sealed class Destinations(val route: String) {
     // Destinations accessible from the Bottom Navigation Bar
     object Home : Destinations("home")
-    object Calendar : Destinations("calendar")
     object Category : Destinations("category")
     object Graph : Destinations("graph")
 

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.mohammed.planity.presentation.MainScreen
+import com.mohammed.planity.presentation.navigation.RootNavHost
 import com.mohammed.planity.ui.theme.PlanityTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PlanityTheme {
-                MainScreen()
+                RootNavHost()
             }
         }
     }

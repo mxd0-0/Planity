@@ -1,7 +1,6 @@
-package com.mohammed.planity.ui.presentation.onBoarding.components
+package com.mohammed.planity.presentation.onBoarding.components
 
-import FlagGreen
-import FlagRed
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +15,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mohammed.planity.R
+import com.mohammed.planity.ui.theme.errorContainer
+import com.mohammed.planity.ui.theme.flagGreen
 
 @Composable
 fun IllustrationSection() {
@@ -39,12 +40,12 @@ fun IllustrationSection() {
             TaskCard(
                 title = "Design workshop",
                 date = "7,june,2023",
-                flagColor = FlagRed,
+                flagColor = errorContainer,
             )
             TaskCard(
                 title = "Create New Post",
                 date = "7,june,2023",
-                flagColor = FlagGreen,
+                flagColor = flagGreen,
                 rotation = -10f
             )
         }

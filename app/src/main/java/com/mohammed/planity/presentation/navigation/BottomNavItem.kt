@@ -1,25 +1,26 @@
 package com.mohammed.planity.presentation.navigation
 
 
-import androidx.annotation.DrawableRes
 import com.mohammed.planity.R
 
+
+// This data class defines the properties for each item in the bottom bar.
+// It should live in a file accessible by this composable, e.g., BottomNavItem.kt
 data class BottomNavItem(
     val route: String,
     val title: String,
-    @DrawableRes val selectedIcon: Int,
-    @DrawableRes val unSelectedIcon: Int
+    val selectedIcon: Int, // Use @DrawableRes Int for resources
+    val unSelectedIcon: Int
 )
 
-// The list of items to be displayed in the bottom navigation bar
+// This list defines the items that will appear in the bottom bar.
 val bottomNavItems = listOf(
     BottomNavItem(
         route = Destinations.Home.route,
         title = "Home",
-        selectedIcon = R.drawable.home_selected,
+        selectedIcon = R.drawable.home_selected, // Replace with your actual drawable resources
         unSelectedIcon = R.drawable.home
     ),
-
     BottomNavItem(
         route = Destinations.Category.route,
         title = "Category",
@@ -32,4 +33,7 @@ val bottomNavItems = listOf(
         selectedIcon = R.drawable.graph_selected,
         unSelectedIcon = R.drawable.graph
     )
+    // Add Calendar here if you re-introduce it
 )
+
+

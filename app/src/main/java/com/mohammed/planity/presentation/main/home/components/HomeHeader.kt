@@ -22,7 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -43,14 +45,14 @@ fun HomeHeader(userName: String, onSettingsClick: () -> Unit) {
             )
             Surface(
                 modifier = Modifier
-                    .offset(x = 180.dp, y = (-4).dp)
+                    .offset(x = 72.dp, y = (-4).dp)
                     .rotate(-15f),
                 shape = RoundedCornerShape(8.dp),
-                color = MaterialTheme.colorScheme.secondary
+                color = MaterialTheme.colorScheme.primary
             ) {
                 Text(
                     text = "to-do",
-                    color = MaterialTheme.colorScheme.onSecondary,
+                    color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontSize = 12.sp,
                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
@@ -71,4 +73,10 @@ fun HomeHeader(userName: String, onSettingsClick: () -> Unit) {
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun Home() {
+    HomeHeader("Planity",{})
 }

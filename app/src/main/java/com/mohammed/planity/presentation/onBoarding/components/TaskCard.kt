@@ -1,8 +1,6 @@
-package com.mohammed.planity.ui.presentation.onBoarding.components
+package com.mohammed.planity.presentation.onBoarding.components
 
-import CardBackground
-import PlanityPurple
-import TextGray
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +26,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mohammed.planity.R
+import com.mohammed.planity.ui.theme.PlanityPurple
+import com.mohammed.planity.ui.theme.TextGray
+import com.mohammed.planity.ui.theme.cardBackgroundColor
 
 @Composable
 fun TaskCard(title: String,
@@ -35,7 +36,7 @@ fun TaskCard(title: String,
              flagColor: Color,
              rotation: Float= 0f) {
     Surface(
-        color = CardBackground,
+        color = cardBackgroundColor,
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
             .fillMaxWidth(0.9f)

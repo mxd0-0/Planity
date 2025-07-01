@@ -6,21 +6,14 @@ import com.mohammed.planity.domain.model.Task
 import com.mohammed.planity.domain.use_case.CreateTaskUseCase
 import com.mohammed.planity.domain.use_case.GetCategoriesUseCase
 import com.mohammed.planity.domain.use_case.GetTasksUseCase
+import com.mohammed.planity.domain.use_case.MoveTaskToCategoryUseCase
 import com.mohammed.planity.presentation.main.home.model.HomeState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.map // <-- IMPORTANT IMPORT
-
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import javax.inject.Inject
-
-import com.mohammed.planity.domain.use_case.MoveTaskToCategoryUseCase // <-- And this
-import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date

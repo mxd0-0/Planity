@@ -1,4 +1,4 @@
-package com.mohammed.planity.ui.presentation.taskinfo
+package com.mohammed.planity.presentation.main.home.taskinfo
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
@@ -45,9 +45,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.mohammed.planity.R
-import com.mohammed.planity.presentation.main.home.taskinfo.TaskInfoEvent
-import com.mohammed.planity.presentation.main.home.taskinfo.TaskInfoState
-import com.mohammed.planity.presentation.main.home.taskinfo.TaskInfoViewModel
 import org.koin.androidx.compose.koinViewModel
 
 /**

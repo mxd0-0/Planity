@@ -12,8 +12,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -56,7 +54,7 @@ fun HomeScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        HomeHeader(userName = state.userName, onSettingsClick = onSettingsClick)
+        HomeHeader(userName = "Planity", onSettingsClick = onSettingsClick)
         Column(modifier = Modifier.padding(horizontal = 24.dp)) {
             Spacer(modifier = Modifier.height(16.dp))
             SearchAndFilterSection(
@@ -117,6 +115,4 @@ fun HomeScreen(
             }
         }
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.mohammed.planity.ui.presentation.onBoarding.components
+package com.mohammed.planity.presentation.onBoarding.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,8 +13,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mohammed.planity.ui.presentation.onBoarding.PlanityPurple
-import com.mohammed.planity.ui.presentation.onBoarding.TextFieldPlaceholderColor
+import com.mohammed.planity.presentation.onBoarding.PlanityPurple
+import com.mohammed.planity.presentation.onBoarding.TextFieldPlaceholderColor
 import com.mohammed.planity.ui.theme.gray400
 import com.mohammed.planity.ui.theme.gray600
 

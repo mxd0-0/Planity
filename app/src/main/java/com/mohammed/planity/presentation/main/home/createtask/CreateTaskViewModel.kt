@@ -1,17 +1,14 @@
-package com.mohammed.planity.ui.presentation.createtask
+package com.mohammed.planity.presentation.main.home.createtask
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mohammed.planity.domain.model.Task
 import com.mohammed.planity.domain.use_case.CreateTaskUseCase
 import com.mohammed.planity.domain.use_case.GetCategoriesUseCase // <-- IMPORT THIS
-import com.mohammed.planity.presentation.main.home.createtask.CreateTaskEvent
-import com.mohammed.planity.presentation.main.home.createtask.CreateTaskState
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 
 class CreateTaskViewModel (
     private val createTaskUseCase: CreateTaskUseCase,

@@ -56,7 +56,6 @@ fun CategoryScreen(
 ) {
     val reorderableState = rememberReorderableLazyListState(
         onMove = { from, to ->
-            // The indices from the library will now correctly match our data list
             onEvent(CategoryEvent.OnMoveCategory(from.index, to.index))
         }
     )
@@ -86,7 +85,6 @@ fun CategoryScreen(
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            // --- REORDERABLE LIST ---
             LazyColumn(
                 state = reorderableState.listState,
                 modifier = Modifier
@@ -175,7 +173,7 @@ fun CategoryItem(
             Column(modifier = Modifier.weight(1f)) {
                 Text(category.name, fontWeight = FontWeight.SemiBold)
                 // You might want to adjust the "7" or make it dynamic
-                Text("${category.taskCount}/7 task", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("${category.taskCount} Tasks", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             Box {
                 IconButton(onClick = { menuExpanded = true }) {

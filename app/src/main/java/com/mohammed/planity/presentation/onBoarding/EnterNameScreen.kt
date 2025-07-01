@@ -1,4 +1,4 @@
-package com.mohammed.planity.ui.presentation.onBoarding
+package com.mohammed.planity.presentation.onBoarding
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -11,8 +11,9 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,7 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mohammed.planity.ui.presentation.onBoarding.components.NameTextField
+import com.mohammed.planity.presentation.onBoarding.components.NameTextField
 import com.mohammed.planity.ui.theme.PlanityTheme
 
 // Re-using colors from the previous screen for consistency
@@ -38,26 +39,30 @@ val TextFieldPlaceholderColor = Color(0xFF6C6C6E)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun EnterNameScreen(
+    onNameEntered: (String) -> Unit, // <-- ADD THIS PARAMETER
     modifier: Modifier = Modifier,
 ) {
     var name by remember { mutableStateOf("") }
-    Scaffold {
+
+    // Use Surface instead of Scaffold for a simpler layout
+    Surface(
+        modifier = modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background // Use theme color
+    ) {
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 32.dp, vertical = 32.dp)
                 .navigationBarsPadding()
                 .imePadding(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Main content area that pushes the button to the bottom
             Column(
                 modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top // Align content to the top of its space
+                verticalArrangement = Arrangement.Top
             ) {
                 Spacer(modifier = Modifier.height(64.dp))
-
                 Text(
                     text = "What is Your Name ?",
                     color = Color.White,
@@ -65,9 +70,7 @@ fun EnterNameScreen(
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
-
                 Spacer(modifier = Modifier.height(16.dp))
-
                 Text(
                     text = "Please provide your name, which we'll use for display and personalize your to-do experience.",
                     color = TextColorGray,
@@ -75,26 +78,28 @@ fun EnterNameScreen(
                     textAlign = TextAlign.Center,
                     lineHeight = 24.sp
                 )
-
-                // Spacer to push the text field down towards the center
                 Spacer(modifier = Modifier.weight(0.5f))
-
                 NameTextField(
                     value = name,
                     onValueChange = { name = it }
                 )
-
-                // Spacer to fill remaining space
                 Spacer(modifier = Modifier.weight(1f))
             }
 
-            // Button at the bottom
             Button(
-                onClick = { },
+                // Use the passed-in lambda, sending the trimmed name
+                onClick = { onNameEntered(name.trim()) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                shape = MaterialTheme.shapes.large
+                // Disable the button if the name is empty or just whitespace
+                enabled = name.isNotBlank(),
+                shape = MaterialTheme.shapes.large,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    // Use a disabled color to give user feedback
+                    disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+                )
             ) {
                 Text(
                     text = "Get Started",
@@ -107,11 +112,10 @@ fun EnterNameScreen(
     }
 }
 
-
 @Preview(showBackground = true, widthDp = 360, heightDp = 780)
 @Composable
 fun EnterNameScreenPreview() {
     PlanityTheme {
-        EnterNameScreen()
+        EnterNameScreen(onNameEntered = {})
     }
 }
