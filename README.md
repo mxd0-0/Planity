@@ -78,7 +78,7 @@ To build and run the current Android version of the project, follow these steps:
 
 1.  **Clone the Repository**
     ```bash
-    git clone https://github.com/your-username/planity.git
+    git clone https://github.com/mxd0-0/planity.git
     ```
 
 2.  **Firebase Setup**
